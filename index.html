@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#002629">
+<title>RideLab — MOCKUP 2</title>
+<style>
+:root{
+ --bg:#002629;
+ --bg2:#072f31;
+ --bg3:#0c393b;
+ --cream:#f5f6b4;
+ --cream2:#ffffdc;
+ --coral:#ff8067;
+ --coral2:#ff6f55;
+ --muted:rgba(245,246,180,.62);
+ --line:rgba(245,246,180,.55);
+ --cline:rgba(255,128,103,.9);
+ --ease:cubic-bezier(.2,.8,.2,1);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--cream);font-family:Arial,Helvetica,sans-serif}
+body{overflow-x:hidden}
+button{font:inherit}
+a{color:inherit;text-decoration:none}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
+.app{min-height:100vh}
+.nav{
+ position:sticky;top:0;z-index:30;
+ display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;
+ padding:10px 30px;border-bottom:1px solid var(--coral);
+ background:rgba(0,38,41,.95);backdrop-filter:blur(12px)
+}
+.nav .brand{font-size:.95rem;color:var(--coral)}
+.navlinks{display:flex;gap:clamp(30px,7vw,110px);justify-content:center}
+.navlinks button{border:0;background:transparent;color:var(--coral);font-size:.75rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.navright{justify-self:end}.join{border:0;background:var(--coral);color:var(--bg);padding:8px 12px;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}
+.wrap{width:min(100%,1680px);margin:0 auto;padding:0 30px}
+.dots-coral{background-image:radial-gradient(circle,var(--coral) 1.2px,transparent 1.25px);background-size:20px 20px}
+.dots-cream{background-image:radial-gradient(circle,var(--cream) 1.2px,transparent 1.25px);background-size:20px 20px}
+.hero-zone{padding:38px 0 26px}
+.frame{
+ border:2px solid var(--coral);border-radius:28px;min-height:570px;padding:clamp(34px,6vw,88px);
+ display:grid;grid-template-columns:minmax(0,1.2fr) minmax(330px,.8fr);gap:50px;align-items:center;background:var(--bg)
+}
+.kicker{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);font-weight:800}
+h1{margin:18px 0 18px;font-size:clamp(4.6rem,10vw,9rem);line-height:.82;letter-spacing:-.07em;color:var(--coral);font-weight:700;max-width:8ch}
+.lead{max-width:720px;color:var(--cream);font-size:clamp(1.05rem,1.5vw,1.3rem);line-height:1.5}
+.hero-graphic{display:grid;grid-template-columns:repeat(4,58px);gap:34px;justify-content:end;align-content:center}
+.ringdot{width:50px;height:50px;border:2px solid var(--coral);border-radius:50%}
+.section{padding:60px 0}
+.section-title{font-size:clamp(3rem,7vw,6.5rem);line-height:.88;letter-spacing:-.065em;margin:0 0 18px;color:var(--cream)}
+.section-intro{max-width:760px;line-height:1.5;color:var(--cream);margin-bottom:28px}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px}
+.card{
+ grid-column:span 4;min-height:320px;border:2px solid var(--coral);border-radius:24px;
+ padding:24px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;
+ background:var(--bg);cursor:pointer;transition:background .26s var(--ease),color .26s var(--ease),transform .26s var(--ease),border-color .26s var(--ease)
+}
+.card.large{grid-column:span 8}
+.card:after{content:"↗";position:absolute;right:18px;top:16px;font-size:1.5rem;color:var(--coral);transition:.25s var(--ease)}
+.card:hover{background:var(--coral);color:var(--bg);transform:translateY(-3px)}
+.card:hover:after{color:var(--bg);transform:translate(3px,-3px)}
+.card:hover .muted,.card:hover .cardmeta,.card:hover .kicker{color:var(--bg)}
+.card.cream{border-color:var(--cream);color:var(--cream)}
+.card.cream:after{color:var(--cream)}
+.card.cream:hover{background:var(--cream);color:var(--bg)}
+.card h3{font-size:clamp(2rem,4vw,4rem);line-height:.92;letter-spacing:-.05em;margin:16px 0 8px}
+.card p{max-width:48ch;line-height:1.45;margin:0}
+.cardmeta{font-size:.74rem;color:var(--coral);letter-spacing:.08em;text-transform:uppercase}
+.preview{display:grid;gap:10px;margin-top:24px}
+.preview div{display:flex;justify-content:space-between;gap:18px;padding-top:10px;border-top:1px solid currentColor}
+.preview span{font-size:.8rem}.preview strong{font-size:1.05rem}
+.quote-zone{padding:40px 0}
+.quote-frame{
+ border:2px solid var(--coral);border-radius:26px;padding:clamp(38px,7vw,90px);min-height:510px;background:var(--bg);
+ display:flex;flex-direction:column;justify-content:center
+}
+.quote{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:clamp(2rem,4vw,4rem);line-height:1.18;color:var(--coral);max-width:1200px}
+.quote-author{margin-top:30px;font-size:.8rem;color:var(--coral);text-transform:uppercase;letter-spacing:.08em}
+.slides{display:flex;gap:8px;margin-top:50px}.slide{width:84px;border-top:4px solid rgba(255,128,103,.22);padding-top:12px;font-family:monospace;font-size:.78rem;color:rgba(255,128,103,.35)}.slide.active{border-color:var(--coral);color:var(--coral)}
+.stats-zone{padding:38px 0}
+.stats-frame{
+ border:2px solid var(--cream);border-radius:26px;padding:clamp(38px,6vw,72px);display:grid;grid-template-columns:1.2fr .8fr;gap:40px;background:var(--bg)
+}
+.stats-title{font-size:clamp(3rem,7vw,6rem);line-height:.88;letter-spacing:-.06em;margin:0}
+.statgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.stat{border:1px solid var(--cream);padding:18px;min-height:130px;display:flex;flex-direction:column;justify-content:space-between}
+.stat strong{font-size:2.5rem;letter-spacing:-.05em}.stat span{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em}
+.orbit{
+ width:min(100%,430px);aspect-ratio:1;justify-self:end;position:relative;border:2px solid var(--cream);border-radius:50%
+}
+.orbit:before,.orbit:after{content:"";position:absolute;border:2px solid var(--cream);border-radius:50%;top:50%;left:8%;transform:translateY(-50%)}
+.orbit:before{width:65%;height:65%}.orbit:after{width:38%;height:38%}
+.orbit .dot{position:absolute;left:3%;top:46%;width:42px;height:42px;border-radius:50%;background:var(--cream)}
+.learn{padding:70px 0 40px;border-top:1px solid var(--coral)}
+.learn h2{color:var(--coral);font-size:clamp(3rem,6vw,5rem);max-width:8ch;line-height:.95;letter-spacing:-.05em}
+.footerline{height:1px;background:var(--coral);margin-top:80px}
+.bottom{display:flex;justify-content:flex-end;padding:26px 0;color:var(--coral);font-family:monospace;font-size:.75rem}
+@media(max-width:1000px){
+ .navlinks{display:none}.nav{grid-template-columns:1fr auto}
+ .frame,.stats-frame{grid-template-columns:1fr}.hero-graphic{justify-content:start}
+ .card,.card.large{grid-column:span 6}.orbit{justify-self:start}
+}
+@media(max-width:650px){
+ .wrap{padding:0 14px}.nav{padding:10px 14px}.hero-zone{padding-top:18px}
+ .frame{min-height:auto;padding:28px 20px;border-radius:20px}
+ h1{font-size:clamp(3.5rem,18vw,5.8rem)}
+ .hero-graphic{grid-template-columns:repeat(4,40px);gap:18px}.ringdot{width:36px;height:36px}
+ .section{padding:42px 0}.grid{grid-template-columns:1fr}.card,.card.large{grid-column:1;min-height:240px;border-radius:19px}
+ .quote-frame{min-height:420px;padding:28px 20px;border-radius:20px}.slides{margin-top:34px}
+ .stats-frame{padding:28px 20px;border-radius:20px}.statgrid{grid-template-columns:1fr 1fr}.orbit{width:min(88vw,360px)}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="nav">
+ <div class="brand">RideLab / <span class="mono">PERFORMANCE YEAR</span></div>
+ <nav class="navlinks"><button>INTRO</button><button>DATA</button><button>RIDES</button><button>TRAINING</button><button>COACH</button></nav>
+ <div class="navright"><button class="join">OPEN PROFILE</button></div>
+</header>
+
+<main>
+<section class="hero-zone dots-coral">
+ <div class="wrap">
+  <div class="frame">
+   <div>
+    <div class="kicker">RideLab · Performance system [2026]</div>
+    <h1>Ride smarter.</h1>
+    <p class="lead">Training, rides, progress and fueling become one coherent performance system. Strong data. Clear decisions. No dashboard noise.</p>
+   </div>
+   <div class="hero-graphic" aria-hidden="true">
+    <span class="ringdot"></span><span class="ringdot"></span><span class="ringdot"></span><span class="ringdot"></span>
+    <span class="ringdot"></span><span class="ringdot"></span><span class="ringdot"></span><span class="ringdot"></span>
+    <span class="ringdot"></span><span class="ringdot"></span><span class="ringdot"></span><span class="ringdot"></span>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="section">
+ <div class="wrap">
+  <div class="kicker">DATA & STATUS · PART [01]</div>
+  <h2 class="section-title">Your performance system.</h2>
+  <p class="section-intro">Jede Kachel gibt bereits vor dem Öffnen die wichtigste Information. Hover verändert die gesamte Fläche – wie ein aktives Instrument.</p>
+  <div class="grid">
+   <article class="card large">
+    <div><div class="cardmeta">[ 01 ] TRAIN</div><h3>Heute: Endurance Z2</h3><p>02:10 h · 155–195 W · stabiler Umfang statt hoher Intensität.</p></div>
+    <div class="preview"><div><span>Fuel</span><strong>60 g/h</strong></div><div><span>Load</span><strong>moderate</strong></div></div>
+   </article>
+   <article class="card">
+    <div><div class="cardmeta">[ 02 ] PROFILE</div><h3>82%</h3><p>Fahrerprofil vollständig.</p></div>
+    <div class="preview"><div><span>Fehlt</span><strong>LTHR</strong></div></div>
+   </article>
+   <article class="card cream">
+    <div><div class="cardmeta">[ 03 ] RIDES</div><h3>184 km</h3><p>3 Fahrten in 3 Tagen.</p></div>
+    <div class="preview"><div><span>Letzte Fahrt</span><strong>42.6 km</strong></div></div>
+   </article>
+   <article class="card cream">
+    <div><div class="cardmeta">[ 04 ] PROGRESS</div><h3>+12%</h3><p>Volumen gegenüber den letzten vier Wochen.</p></div>
+    <div class="preview"><div><span>FTP</span><strong>245 W</strong></div></div>
+   </article>
+   <article class="card">
+    <div><div class="cardmeta">[ 05 ] FUEL</div><h3>60 g/h</h3><p>Kohlenhydrat-Ziel für die heutige Einheit.</p></div>
+    <div class="preview"><div><span>Fluid</span><strong>650 ml/h</strong></div></div>
+   </article>
+  </div>
+ </div>
+</section>
+
+<section class="quote-zone dots-coral">
+ <div class="wrap">
+  <div class="quote-frame">
+   <div class="quote">“Heute locker bleiben. Die Belastung der letzten Tage ist hoch genug – die beste Entscheidung ist eine saubere Z2-Einheit.”</div>
+   <div class="quote-author">RIDELAB COACH · TRAINING SIGNAL</div>
+   <div class="slides"><div class="slide">[ 01 ]</div><div class="slide active">[ 02 ]</div><div class="slide">[ 03 ]</div></div>
+  </div>
+ </div>
+</section>
+
+<section class="stats-zone dots-cream">
+ <div class="wrap">
+  <div class="stats-frame">
+   <div>
+    <div class="kicker" style="color:var(--cream)">PROGRESS · PART [02]</div>
+    <h2 class="stats-title">Performance by the numbers.</h2>
+    <p class="section-intro">Große Zahlen und simple Geometrie ersetzen konventionelle Widget-Wände.</p>
+    <div class="statgrid">
+     <div class="stat"><strong>245 W</strong><span>FTP</span></div>
+     <div class="stat"><strong>2.72</strong><span>W/kg</span></div>
+     <div class="stat"><strong>+8</strong><span>Form</span></div>
+     <div class="stat"><strong>6:42</strong><span>Week hours</span></div>
+    </div>
+   </div>
+   <div class="orbit"><span class="dot"></span></div>
+  </div>
+ </div>
+</section>
+
+<section class="learn">
+ <div class="wrap">
+  <h2>Explore RideLab.</h2>
+  <div class="grid">
+   <article class="card" style="background:var(--coral);color:var(--bg)">
+    <div><div class="cardmeta" style="color:var(--bg)">[ 10 ]</div><h3>Training System</h3><p>Wochenplan, Session-Logik und Zonen.</p></div>
+   </article>
+   <article class="card">
+    <div><div class="cardmeta">[ 11 ]</div><h3>Ride Analysis</h3><p>FIT, Leistung, Herzfrequenz und Route.</p></div>
+   </article>
+   <article class="card">
+    <div><div class="cardmeta">[ 12 ]</div><h3>Knowledge</h3><p>FTP, TSS, Sweet Spot und Fueling erklärt.</p></div>
+   </article>
+  </div>
+  <div class="footerline"></div>
+  <div class="bottom">[ RIDELAB · MOCKUP 2 ]</div>
+ </div>
+</section>
+</main>
+</div>
+</body>
+</html>
